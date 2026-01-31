@@ -102,11 +102,11 @@ variable "app_subdomain" {
   default     = "app"
 }
 
-# variable "certificate_validation_method" {
-#   description = "ACM validation method. Students can do DNS (Route53) or EMAIL."
-#   type        = string
-#   default     = "DNS"
-# }
+variable "certificate_validation_method" {
+  description = "ACM validation method. Students can do DNS (Route53) or EMAIL."
+  type        = string
+  default     = "DNS"
+}
 
 # variable "enable_waf" {
 #   description = "Toggle WAF creation."
@@ -138,11 +138,11 @@ variable "enable_alb_access_logs" {
   default     = true # ← choose your preferred default
 }
 
-# variable "manage_route53_in_terraform" {
-#   description = "Whether to let Terraform manage creation / updates of the Route 53 hosted zone"
-#   type        = bool
-#   default     = false # ← most people start with true here ### updated to false
-# }
+variable "manage_route53_in_terraform" {
+  description = "Whether to let Terraform manage creation / updates of the Route 53 hosted zone"
+  type        = bool
+  default     = false # ← most people start with true here ### updated to false
+}
 
 # variable "waf_log_destination" {
 #   description = "Where to send AWS WAFv2 logs: 'cloudwatch', 'firehose', 's3', or 'none'"
@@ -161,15 +161,15 @@ variable "enable_alb_access_logs" {
 # }
 
 
-# variable "route53_hosted_zone_id" {
-#   type    = string
-#   default = "Z04934863IQBK46XBHWCV"
+variable "route53_hosted_zone_id" {
+  type    = string
+  default = "Z04934863IQBK46XBHWCV"
 
-#   validation {
-#     condition     = var.route53_hosted_zone_id == "" || can(regex("^[A-Z0-9]{21}$", var.route53_hosted_zone_id))
-#     error_message = "route53_hosted_zone_id must be empty or a valid 21-character Route 53 hosted zone ID (e.g. Z0123456789ABCDEF)."
-#   }
-# }
+  validation {
+    condition     = var.route53_hosted_zone_id == "" || can(regex("^[A-Z0-9]{21}$", var.route53_hosted_zone_id))
+    error_message = "route53_hosted_zone_id must be empty or a valid 21-character Route 53 hosted zone ID (e.g. Z0123456789ABCDEF)."
+  }
+}
 
 variable "alb_access_logs_prefix" {
   type    = string
@@ -181,9 +181,9 @@ variable "alb_access_logs_prefix" {
   }
 }
 
-### Lab 2a
-# variable "cloudfront_acm_cert_arn" {
-#   description = "ACM certificate ARN in us-east-1 for CloudFront (covers a4l-class7.com and app.a4l-class7.com)."
-#   type        = string
-#   default     = ""
-# }
+## Lab 2a
+variable "cloudfront_acm_cert_arn" {
+  description = "ACM certificate ARN in us-east-1 for CloudFront (covers a4l-class7.com and app.a4l-class7.com)."
+  type        = string
+  default     = ""
+}

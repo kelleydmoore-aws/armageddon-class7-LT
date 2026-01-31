@@ -1,5 +1,5 @@
 ############################################
-# Locals (naming convention: bos-*) (Brotherhood Of Steel)
+# Locals (naming convention: gru-*) (Brotherhood Of Steel)
 ############################################
 locals {
   name_prefix = var.project_name
@@ -9,18 +9,18 @@ locals {
 # Bonus A - Data + Locals
 ############################################
 
-# Explanation: bos wants to know “who am I in this galaxy?” so ARNs can be scoped properly.
-data "aws_caller_identity" "bos_self01" {}
+# Explanation: gru wants to know “who am I in this galaxy?” so ARNs can be scoped properly.
+data "aws_caller_identity" "gru_self01" {}
 
 # Explanation: Region matters—hyperspace lanes change per sector.
-data "aws_region" "bos_region01" {}
+data "aws_region" "gru_region01" {}
 
 locals {
   # Explanation: Name prefix is the roar that echoes through every tag.
-  bos_prefix = var.project_name
+  gru_prefix = var.project_name
 
   # TODO: Students should lock this down after apply using the real secret ARN from outputs/state
-  bos_secret_arn_guess = "arn:aws:secretsmanager:${data.aws_region.bos_region01.region}:${data.aws_caller_identity.bos_self01.account_id}:secret:${local.bos_prefix}/rds/mysql*"
+  gru_secret_arn_guess = "arn:aws:secretsmanager:${data.aws_region.gru_region01.region}:${data.aws_caller_identity.gru_self01.account_id}:secret:${local.gru_prefix}/rds/mysql*"
 }
 
 ############################################
@@ -29,32 +29,32 @@ locals {
 
 locals {
   # Explanation: This is the roar address — where the galaxy finds your app.
-  bos_fqdn = "${var.app_subdomain}.${var.domain_name}"
+  gru_fqdn = "${var.app_subdomain}.${var.domain_name}"
 }
 
 ############################################
-# Bonus B - Route53 (Hosted Zone + DNS records + ACM validation + ALIAS to ALB)
+# Bonus B - Route53 (Hosgted Zone + DNS records + ACM validation + ALIAS to ALB)
 ############################################
 
 locals {
   # Explanation: Chewbacca needs a home planet—Route53 hosted zone is your DNS territory.
-  bos_zone_name = var.domain_name
+  gru_zone_name = var.domain_name
 
   # Explanation: Use either Terraform-managed zone or a pre-existing zone ID (students choose their destiny).
-  # bos_zone_id = var.manage_route53_in_terraform ? aws_route53_zone.bos_zone01[0].zone_id : var.route53_hosted_zone_id
-  bos_zone_id = var.route53_hosted_zone_id
+  # gru_zone_id = var.manage_route53_in_terraform ? aws_route53_zone.gru_zone01[0].zone_id : var.route53_hosted_zone_id
+  gru_zone_id = var.route53_hosted_zone_id
   # Explanation: This is the app address that will growl at the galaxy (app.chewbacca-growl.com).
-  bos_app_fqdn = "${var.app_subdomain}.${var.domain_name}"
+  gru_app_fqdn = "${var.app_subdomain}.${var.domain_name}"
 }
 
 ### Data
 ### Lab 2B
 # Explanation: Chewbacca only opens the hangar to CloudFront — everyone else gets the Wookiee roar.
-data "aws_ec2_managed_prefix_list" "bos_cf_origin_facing01" {
+data "aws_ec2_managed_prefix_list" "gru_cf_origin_facing01" {
   name = "com.amazonaws.global.cloudfront.origin-facing"
 }
 
-data "aws_cloudfront_origin_request_policy" "bos_orp_all_viewer01" {
+data "aws_cloudfront_origin_request_policy" "gru_orp_all_viewer01" {
   name = "Managed-AllViewer"
 }
 
@@ -67,15 +67,17 @@ data "aws_cloudfront_origin_request_policy" "managed_all_viewer_except_host" {
   name = "Managed-AllViewerExceptHostHeader" # Forwards viewer Host, cookies, queries, etc.
 }
 
-data "aws_cloudfront_origin_request_policy" "bos_orp_all_viewer_except_host01" {
+data "aws_cloudfront_origin_request_policy" "gru_orp_all_viewer_except_host01" {
   name = "Managed-AllViewerExceptHostHeader"
 }
 
-data "aws_cloudfront_cache_policy" "bos_use_origin_cache_headers01" {
+data "aws_cloudfront_cache_policy" "gru_use_origin_cache_headers01" {
   name = "UseOriginCacheControlHeaders"
 }
 
 # Explanation: Same idea, but includes query strings in the cache key when your API truly varies by them.
-data "aws_cloudfront_cache_policy" "bos_use_origin_cache_headers_qs01" {
+data "aws_cloudfront_cache_policy" "gru_use_origin_cache_headers_qs01" {
   name = "UseOriginCacheControlHeaders-QueryStrings"
 }
+
+

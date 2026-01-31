@@ -67,9 +67,9 @@ output "edo_acm_cert_arn" {
   value = aws_acm_certificate.edo_acm_cert01.arn
 }
 
-output "edo_waf_arn" {
-  value = var.enable_waf ? aws_wafv2_web_acl.edo_cf_waf01.arn : null
-}
+# output "edo_waf_arn" {
+#   value = var.enable_waf ? aws_wafv2_web_acl.edo_cf_waf01.arn : null
+# }
 
 output "edo_dashboard_name" {
   value = aws_cloudwatch_dashboard.edo_dashboard01.dashboard_name
@@ -95,9 +95,9 @@ output "edo_waf_log_destination" {
   value = var.waf_log_destination
 }
 
-output "edo_waf_cw_log_group_name" {
-  value = var.waf_log_destination == "cloudwatch" ? aws_cloudwatch_log_group.edo_waf_log_group01[0].name : null
-}
+# output "edo_waf_cw_log_group_name" {
+#   value = var.waf_log_destination == "cloudwatch" ? aws_cloudwatch_log_group.edo_waf_log_group01[0].name : null
+# }
 
 output "current_growl_secret" {
   value     = random_password.edo_origin_header_value01.result

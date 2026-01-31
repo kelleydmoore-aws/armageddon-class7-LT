@@ -5,6 +5,11 @@ provider "aws" {
   region = var.aws_region
 }
 
+provider "aws" {
+  alias = "apnortheast1"
+  region = "ap-northeast-1"
+}
+
 terraform {
   required_version = ">= 1.5.0"
 

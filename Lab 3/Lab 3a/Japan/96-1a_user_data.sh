@@ -25,7 +25,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s'
 )
 logger = logging.getLogger(__name__)
-REGION = os.environ.get("AWS_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "ap-northeast-1")
 SECRET_ID = os.environ.get("SECRET_ID", "edo/rds/mysql")
 secrets = boto3.client("secretsmanager", region_name=REGION)
 def get_db_creds():

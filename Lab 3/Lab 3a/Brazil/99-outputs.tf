@@ -30,17 +30,17 @@ output "gru_log_group_name" {
 #Bonus-A outputs (append to outputs.tf)
 
 # Explanation: These outputs prove Chewbacca built private hyperspace lanes (endpoints) instead of public chaos.
-output "gru_vpce_ssm_id" {
-  value = aws_vpc_endpoint.gru_vpce_ssm01.id
-}
+# output "gru_vpce_ssm_id" {
+#   value = aws_vpc_endpoint.gru_vpce_ssm01.id
+# }
 
 output "gru_vpce_logs_id" {
   value = aws_vpc_endpoint.gru_vpce_logs01.id
 }
 
-output "gru_vpce_secrets_id" {
-  value = aws_vpc_endpoint.gru_vpce_secrets01.id
-}
+# output "gru_vpce_secrets_id" {
+#   value = aws_vpc_endpoint.gru_vpce_secrets01.id
+# }
 
 output "gru_vpce_s3_id" {
   value = aws_vpc_endpoint.gru_vpce_s3_gw01.id
@@ -71,9 +71,9 @@ output "gru_target_group_arn" {
 #   value = var.enable_waf ? aws_wafv2_web_acl.gru_cf_waf01.arn : null
 # }
 
-output "gru_dashboard_name" {
-  value = aws_cloudwatch_dashboard.gru.dashboard_name
-}
+# output "gru_dashboard_name" {
+#   value = aws_cloudwatch_dashboard.gru.dashboard_name
+# }
 
 # output "gru_route53_zone_id" {
 #   value = local.gru_zone_id
@@ -98,3 +98,7 @@ output "gru_alb_logs_bucket_name" {
 # output "gru_waf_cw_log_group_name" {
 #   value = var.waf_log_destination == "cloudwatch" ? aws_cloudwatch_log_group.gru_waf_log_group01[0].name : null
 # }
+
+output "gru_tgw_id" {
+  value = aws_ec2_transit_gateway.gru_tgw01.id
+}

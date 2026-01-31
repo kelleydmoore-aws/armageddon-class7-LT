@@ -27,11 +27,11 @@ resource "aws_lb_target_group" "gru_tg01" {
   }
 }
 
-# Explanation: Chewbacca personally introduces the ALB to the private EC2 — “this is my friend, don’t shoot.”
-resource "aws_lb_target_group_attachment" "gru_tg_attach01" {
-  target_group_arn = aws_lb_target_group.gru_tg01.arn
-  target_id        = aws_instance.gru_ec201_private_bonus.id
-  port             = 80
+# # Explanation: Chewbacca personally introduces the ALB to the private EC2 — “this is my friend, don’t shoot.”
+# resource "aws_lb_target_group_attachment" "gru_tg_attach01" {
+#   target_group_arn = aws_lb_target_group.gru_tg01.arn
+#   target_id        = aws_instance.gru_ec201_private_bonus.id
+#   port             = 80
 
-  # TODO: students ensure EC2 security group allows inbound from ALB SG on this port (rule above)
-}
+#   # TODO: students ensure EC2 security group allows inbound from ALB SG on this port (rule above)
+# }
